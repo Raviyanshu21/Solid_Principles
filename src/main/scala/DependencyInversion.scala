@@ -8,13 +8,13 @@ object DependencyInversion extends App {
   class BackEndDeveloper extends Developer{
     override def develop: Any = writeJava()
 
-    def writeJava(): Any = {}
+    def writeJava(): Any = {println("Backend is coded in JAVA")}
   }
 
   class FrontEndDeveloper extends Developer{
     override def develop: Any = writeJavaScript()
 
-    def writeJavaScript(): Any = {}
+    def writeJavaScript(): Any = {println("Frontend is coded in JS")}
   }
 
 
@@ -23,7 +23,9 @@ object DependencyInversion extends App {
       developers.foreach((d: DependencyInversion.Developer) => d.develop)
     }
   }
+  val back = new BackEndDeveloper
+  val front = new FrontEndDeveloper
 
-
-
+  val project = new Project(developers = List(back, front))
+  project.implement
 }
